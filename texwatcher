@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'listen'
+
+LATEX_COMMAND = 'rubber --pdf'
+
+callback = Proc.new do |modified, added, removed|
+    puts %x[ #{LATEX_COMMAND} #{ARGV[0]} ]
+end
+
+Listen.to(Dir.pwd)
+      .filter(/\.tex$/)
+      .change(&callback)
+      .start
+
