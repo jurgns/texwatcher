@@ -11,5 +11,5 @@ end
 Listen.to(Dir.pwd)
       .filter(/\.tex$/)
       .change(&callback)
-      .start
+      .start!
 
